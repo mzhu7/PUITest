@@ -13,8 +13,32 @@ function addListItem() {
     console.log(itemInput.value);
 
 	let newItem = document.createElement("li");
-	newItem.appendChild(document.createTextNode(itemInput.value));
+    let itemId = "check-" + itemInput.value;
+
+    // add the checkbox to the new item element
+    let newCheckbox = document.createElement("input");
+    newCheckbox.type = "checkbox";
+    newCheckbox.class = "complete-item";
+    newCheckbox.id = itemId;
+    newItem.appendChild(newCheckbox);
+    newCheckbox.onclick = completeListItem(newCheckbox);
+
+    // add the text to the new item element
+    let newLabel = document.createElement("label");
+    newLabel.for = itemId;
+    newLabel.textContent = itemInput.value;
+	newItem.appendChild(newLabel);
+    
+    // add the delete item button to the new item element
+    let deleteButton = document.createElement("button");
+    deleteButton.textContent = "X";
+    newItem.appendChild(deleteButton);
+    deleteButton.onclick = deleteListItem(deleteButton.parentNode);
+
     list.appendChild(newItem);
+
+
+
 }
 
 function deleteListItem(item) {
@@ -23,6 +47,7 @@ function deleteListItem(item) {
 }
 
 function completeListItem(item) {
+    console.log(typeof(item));
     if (item.checked) { // true if the input checkbox is checked
         item.parentNode.style.textDecoration = "line-through";
         // in css, this would be: "text-decoration: line-through"
