@@ -20,8 +20,8 @@ function addListItem() {
     newCheckbox.type = "checkbox";
     newCheckbox.class = "complete-item";
     newCheckbox.id = itemId;
+    newCheckbox.setAttribute("onclick", 'completeListItem(this)')
     newItem.appendChild(newCheckbox);
-    newCheckbox.onclick = completeListItem(newCheckbox);
 
     // add the text to the new item element
     let newLabel = document.createElement("label");
@@ -32,8 +32,8 @@ function addListItem() {
     // add the delete item button to the new item element
     let deleteButton = document.createElement("button");
     deleteButton.textContent = "X";
+    deleteButton.setAttribute("onclick", 'deleteListItem(this.parentNode)');
     newItem.appendChild(deleteButton);
-    deleteButton.onclick = deleteListItem(deleteButton.parentNode);
 
     list.appendChild(newItem);
 
